@@ -201,6 +201,26 @@
             z-index: 10; /* Ensure it stays on top of the modal content */
         }
 
+        .modal-prev, .modal-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 32px;
+            color: black;
+            cursor: pointer;
+            padding: 16px;
+            background-color: rgba(255, 255, 255, 0.7); /* Adds slight background for visibility */
+            border-radius: 50%;
+        }
+
+        .modal-prev {
+            left: 10px;
+        }
+
+        .modal-next {
+            right: 10px;
+        }
+
     </style>
 </head>
 <body>
@@ -236,6 +256,8 @@
         <span class="close" onclick="closeModal()">&times;</span>
         <div class="modal-content">
             <img id="modalImage" src="" alt="Enlarged Image">
+            <a class="modal-next" onclick="changeModalSlide(1)">&#10095;</a>
+            <a class="modal-prev" onclick="changeModalSlide(-1)">&#10094;</a>
         </div>
     </div>
 	
@@ -287,10 +309,18 @@
     function openModal(imageSrc) {
         document.getElementById("modalImage").src = imageSrc;
         document.getElementById("myModal").style.display = "flex";
+        currentSlide = index;
     }
 
     function closeModal() {
         document.getElementById("myModal").style.display = "none";
+    }
+
+    function changeModalSlide(n) {
+        const slides = document.getElementsByClassName("slide");
+        currentSlide = (currentSlide + n + slides.length) % slides.length;
+        const newImageSrc = slides[currentSlide].querySelector("img").src;
+        document.getElementById("modalImage").src = newImageSrc;
     }
 
 	document.addEventListener("DOMContentLoaded", function() {
