@@ -291,6 +291,7 @@
 
 <script>
 	let currentSlide = 0;
+    let currentModalSlide = 0;
 
 	function changeSlide(n) {
 		const slides = document.getElementsByClassName("slide");
@@ -310,7 +311,7 @@
     function openModal(imageSrc) {
         document.getElementById("modalImage").src = imageSrc;
         document.getElementById("myModal").style.display = "flex";
-        currentSlide = index;
+        currentModalSlide = index;
     }
 
     function closeModal() {
@@ -319,8 +320,8 @@
 
     function changeModalSlide(n) {
         const slides = document.getElementsByClassName("slide");
-        currentSlide = (currentSlide + n + slides.length) % slides.length;
-        const newImageSrc = slides[currentSlide].querySelector("img").src;
+        currentModalSlide = (currentModalSlide + n + slides.length) % slides.length;
+        const newImageSrc = slides[currentModalSlide].querySelector("img").src;
         document.getElementById("modalImage").src = newImageSrc;
     }
 
