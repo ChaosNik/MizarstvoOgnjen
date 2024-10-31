@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mizarstvo Ognjen - Custom Woodwork</title>
+    <style>
+		/* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+		
+        /* Basic reset and styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-image: url('background.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            overflow-x: hidden;
+        }
+        
+        header {
+            background-color: rgba(237, 220, 191, 0.6);
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .logo {
+            font-size: 2em;
+            font-weight: bold;
+            color: black;
+            display: inline-block;
+            transition: transform 1s;
+        }
+
+        .logo:hover {
+            transform: scale(1.2);
+        }
+
+        h1 {
+            font-size: 1.5em;
+            color: #333;
+            margin: 0;
+        }
+
+        /* Section styling with birch background */
+        .section {
+            background-image: url('birch.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            width: 60%; /* Center box width */
+            margin: 40px auto;
+            padding: 40px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease-in-out forwards;
+        }
+		
+		.section:nth-of-type(1) { animation-delay: 0.5s; }
+        .section:nth-of-type(2) { animation-delay: 1s; }
+        .section:nth-of-type(3) { animation-delay: 1.5s; }
+		.section:nth-of-type(4) { animation-delay: 2s; }
+		.section:nth-of-type(5) { animation-delay: 2.5s; }
+
+        h2 {
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9em;
+            animation: fadeIn 1s ease-in-out;
+        }
+		
+		.copyright {
+            background-color: rgba(237, 220, 191, 0.6);
+        }
+		
+		.slideshow-container {
+			position: relative;
+			width: 100%;
+			max-width: 800px;
+			margin: 0 auto;
+		}
+
+		.slide {
+			height: 0;
+			display: block;
+			overflow: auto;
+			width: 100%;
+			animation: fadeIn 1s ease-in-out;
+		}
+
+		.slide.active {
+			height: auto;
+			display: block;
+			opacity: 1;
+		}
+
+		.slide img {
+			width: 100%;
+			height: auto;
+		}
+
+		.prev, .next {
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);  
+
+			color: white;
+			font-size: 32px;
+			padding: 16px;
+			cursor: pointer;
+			user-select: none;
+		}
+
+		.prev {
+			left: 0;
+		}
+
+		.next {
+			right: 0;
+		}
+
+    </style>
+</head>
+<body>
+
+    <!-- Header with Logo Image and Company Name -->
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Mizarstvo Ognjen Logo">
+        </div>
+    </header>
+	
+	<!-- O nama Section -->
+    <section class="section">
+        <h2>O nama</h2>
+        <p>Naš direktor je Ognjen Dević.<br/>
+		Najjači je stolar u Evropskoj Uniji.<br/>
+		Ne postoji razlog da odete kod nekoga drugog.</p>
+    </section>
+	
+	<!-- Slideshow Section -->
+    <section class="section">
+		<h2>Naši radovi</h2>
+		<p>Ovo je mali probrani dio našeg namještaja i kuhinja po mjeri koje smo izrađivali sa preciznošću i ljubavlju.</p>
+		<div class="slideshow-container">
+			<!-- Images will be inserted here by JavaScript -->
+			<a class="next" onclick="changeSlide(1)">&#10095;</a>
+			<a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+		</div>
+	</section>
+	
+    <!-- Vizija Section -->
+    <section class="section">
+        <h2>Naša vizija</h2>
+        <p>Željeli bi da zaradimo što više para.</p>
+    </section>
+
+    <!-- Ideje i vrijednosti Section -->
+    <section class="section">
+        <h2>Naše ideje i vrijednosti</h2>
+        <p>Mnogo volimo da dobijamo pare od Vas.</p>
+    </section>
+	
+    <!-- Contacts Section -->
+    <section class="section">
+        <h2>Contact us</h2>
+        <p>e-mail: contact@mizog.com<br/>
+		tel: +382 56565565656<br/>
+		IG: instagram.com/mizarstvo_ognjen</p>
+    </section>
+
+    <!-- Copyright Section -->
+    <footer class="copyright">
+        <p>©2024 Karpasoft S.P. All rights reserved.</p>
+    </footer>
+
+</body>
+
+<script>
+	let currentSlide = 0;
+
+	function changeSlide(n) {
+		const slides = document.getElementsByClassName("slide");
+
+		// Hide the current slide
+		slides[currentSlide].classList.remove("active");
+		slides[currentSlide].style.display = "none";
+
+		// Calculate the next slide index
+		currentSlide = (currentSlide + n + slides.length) % slides.length;
+
+		// Show the next slide
+		slides[currentSlide].classList.add("active");
+		slides[currentSlide].style.display = "block";
+	}
+
+	document.addEventListener("DOMContentLoaded", function() {
+		const slideshowContainer = document.querySelector('.slideshow-container');
+		let imgIndex = 1;
+		const maxImages = 50; // Set the maximum number of images to check
+
+		while (imgIndex <= maxImages) {
+			const imgPath = `${imgIndex.toString().padStart(2, '0')}.png`;
+			
+			const img = new Image();
+			img.src = imgPath;
+			img.alt = `Project Image ${imgIndex}`;
+			
+			if (imgIndex === 1) {
+				const slideDiv = document.createElement('div');
+				slideDiv.classList.add('slide');
+
+				slideDiv.classList.add('active');
+				slideDiv.style.display = "block"; // Only the first image is displayed initially
+
+				const anchor = document.createElement('a');
+				anchor.href = imgPath;
+				anchor.target = "_blank";
+
+				anchor.appendChild(img);
+				slideDiv.appendChild(anchor);
+				slideshowContainer.insertBefore(slideDiv, slideshowContainer.querySelector('.next')); // Insert before 'next' button
+			}
+			else {
+				img.onload = function() {
+					const slideDiv = document.createElement('div');
+					slideDiv.classList.add('slide');
+					
+					slideDiv.style.display = "none";
+					
+					const anchor = document.createElement('a');
+					anchor.href = imgPath;
+					anchor.target = "_blank";
+
+					anchor.appendChild(img);
+					slideDiv.appendChild(anchor);
+					slideshowContainer.insertBefore(slideDiv, slideshowContainer.querySelector('.next')); // Insert before 'next' button
+				}
+			}
+
+			imgIndex++;
+		}
+
+		// Set up automatic slideshow
+		setInterval(() => changeSlide(1), 3000);
+	});
+</script>
+</html>
